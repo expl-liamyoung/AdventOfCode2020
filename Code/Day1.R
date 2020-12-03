@@ -1,18 +1,16 @@
 # Read data
-data <- readr::read_csv("~/AdventOfCode2020/Data/Day1.txt",  col_names = FALSE)
+data <-
+  readr::read_csv("~/AdventOfCode2020/Data/Day1.txt",  col_names = FALSE)
 nums <- data$X1
 
 # Task 1 ------------------------------------------------------------------
 
 # Initial idea, complete enumeration (loop through all conditions)
 for (i in 1:length(nums)) {
-  for (j in 1:length(nums)) {
-    # Ensure numbers are unique
-    if (i != j) {
-      # Check if adds to 2020
-      if (nums[i] + nums[j] == 2020) {
-        task1ans <- c(nums[i], nums[j])
-      }
+  for (j in i + 1:length(nums)) {
+    # Check if adds to 2020
+    if (nums[i] + nums[j] == 2020) {
+      task1ans <- c(nums[i], nums[j])
     }
   }
 }
@@ -30,12 +28,10 @@ for (i in 1:length(nums)) {
 
 # Slow approach again, with third loop. VERY SLOW ~ 6 seconds
 for (i in 1:length(nums)) {
-  for (j in 1:length(nums)) {
+  for (j in i + 1:length(nums)) {
     for (k in 1:length(nums)) {
-      if ((i != j) & (i != k) & (j != k)) {
-        if (nums[i] + nums[j] + nums[k] == 2020) {
-          task2ans <- c(nums[i], nums[j], nums[k])
-        }
+      if (nums[i] + nums[j] + nums[k] == 2020) {
+        task2ans <- c(nums[i], nums[j], nums[k])
       }
     }
   }
